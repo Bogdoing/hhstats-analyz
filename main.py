@@ -24,5 +24,5 @@ def getAnalyz():
     analyz = Analyz(training_steps, '01-01-2020')    
     return analyz.analyze(lang_name, data_values, data_values_training, training_steps)
 
-if __name__ == '__main__':
-    app.run()
+# if __name__ == '__main__':
+#     app.run()
