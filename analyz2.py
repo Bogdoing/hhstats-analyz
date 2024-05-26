@@ -25,24 +25,25 @@ class Analyz:
 
         # Прогнозируем несколько значений вперед (например, 3 значения)
         forecast = model_fit.forecast(steps=self.training_steps)
-        print("Predicted Job Opening for the next period:", forecast)
-        print("Predicted Job Opening for the next period:", forecast[0])
+        # print("Predicted Job Opening for the next period <list>:", forecast)
+        # print("Predicted Job Opening for the next period  <int>:", forecast[0])
 
         # Добавляем предсказанные значения к оригинальному набору данных
         new_dates = pd.date_range(start=self.time_start, periods=len(data_values) + len(forecast), freq='M')
         new_data = data_values.copy()
         new_data.extend(round(forecast, 0))
 
-        #Визуализация новых данных
-        plt.figure(figsize=(5, 4))
-        plt.plot(data_index, data_values, marker='o', label='Оригинальные данные')
-        plt.plot(new_dates, new_data, marker='x', linestyle='dashed', color='red', label='Прогноз')
-        plt.xlabel('Дата')
-        plt.ylabel('Значение')
-        plt.title('Прогноз значений временного ряда')
-        plt.legend()
-        plt.show()
+        # Визуализация новых данных
+        # plt.figure(figsize=(5, 4))
+        # plt.plot(data_index, data_values, marker='o', label='Оригинальные данные')
+        # plt.plot(new_dates, new_data, marker='x', linestyle='dashed', color='red', label='Прогноз')
+        # plt.xlabel('Дата')
+        # plt.ylabel('Значение')
+        # plt.title('Прогноз значений временного ряда ' + lang_name)
+        # plt.legend()
+        # plt.show()
 
-        return new_data
+        # return new_data
+        return round(forecast[0], 0)
 
     

@@ -1,28 +1,39 @@
 from flask import Flask
 
-from analyz2 import Analyz
+from hh import HH
+
+import git
+import langList
 
 app = Flask(__name__)
 
-@app.route('/')#/api/flask
+@app.route('/')
 def hello_world():
     return 'This is from Flask Serverless Function'
 
+
 @app.route('/analyz')
 def getAnalyz():
+    hh = HH()
+    lang_name = 'React'
+    region = '26'
 
-    lang_name = 'php'
-    training_steps = 1
-
-    # data_values =          [1021, 1021, 1087, 1113, 1141]
-    # data_values_training = [1214, 1207, 1317, 1355, 1418]  # Данные для обучения модели
+    result_hh = []
+    result_git = []
     
-    data_values =          [1021, 1021, 1087, 1113, 1141, 1214, 1207, 1317, 1355, 1418, 1292]
-    data_values_training = [1021, 1021, 1087, 1113, 1141, 1214, 1207, 1317, 1355, 1418, 1292] # Данные для обучения модели
+    for i in langList.region_HH:
+        for j in langList.url_HH:
+            res = hh.getAnalyz(j, i)
+            result_hh.append({'region': i, 'lang': j, 'res' : res})
+
+    for i in langList.lang_github:
+        res = git.getAnalyz(i)
+        result_git.append({'lang': i, 'res' : res})
+
+    return [result_hh, result_git]
 
 
-    analyz = Analyz(training_steps, '01-01-2020')    
-    return analyz.analyze(lang_name, data_values, data_values_training, training_steps)
+
 
 # if __name__ == '__main__':
 #     app.run()
