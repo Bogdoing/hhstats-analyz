@@ -9,7 +9,7 @@ class DB:
                             user="postgres", 
                             password="1234", 
                             host="localhost")
-        self.cursor = self.conn.cursor()        
+        self.cursor = self.conn.cursor()     
 
     # Закрываем курсор и соединение
     def closeDB(self):
@@ -18,11 +18,15 @@ class DB:
 
     ###
 
-    def intoHH():
-        pass
+    def insertHHData(self, lang, vac, vacRef, res, region, data):
+        query = "INSERT INTO hhpredict (lang, vac, vacRef, res, region, data) VALUES (%s, %s, %s, %s, %s, %s)"
+        self.cursor.execute(query, (lang, vac, vacRef, res, region, data))
+        self.conn.commit()
 
-    def intoGit():
-        pass
+    def insertGitData(self, count, lang, data):
+        query = "INSERT INTO gitpredict (count, lang, data) VALUES (%s, %s, %s);"
+        self.cursor.execute(query, (count, lang, data))
+        self.conn.commit()
 
     ###
     
