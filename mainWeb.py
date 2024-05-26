@@ -1,3 +1,5 @@
+from flask import Flask
+# from datetime import datetime
 from datetime import date, timedelta
 
 from db import DB
@@ -6,7 +8,14 @@ import hh
 import git
 import langList
 
+app = Flask(__name__)
 
+@app.route('/')
+def hello_world():
+    return 'This is from Flask Serverless Function'
+
+
+@app.route('/analyz')
 def getAnalyz():
     result_hh = []
     result_git = []
@@ -50,7 +59,7 @@ def getAnalyz():
 
     return [result_hh, result_git]
 
-print(getAnalyz())
+
 
 
 # if __name__ == '__main__':

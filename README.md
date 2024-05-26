@@ -1,10 +1,11 @@
 https://flask.palletsprojects.com/en/latest/quickstart/#
 
-startup: flask --app main run
+startup: flask --app mainWeb run
 curr host: flask run --host=0.0.0.0
-debug mod: flask --app main run --debug
+debug mod: flask --app mainWeb run --debug
 
 db: python db.py
+local: python main.py
 
 dependencies:
 pip install flask
